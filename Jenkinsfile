@@ -87,7 +87,6 @@ pipeline {
                 script {
                     echo 'copying Docker compose file...'
                     // def dockerComposeCMD = "docker-compose -f docker-compose.yaml up --detach"
-                    // def dockerComposeCMD = "docker compose --file docker-compose.yaml up --detach"
 
                     def shellcmd = "bash ./server-cmds.sh ${IMAGE_NAME}"
                     def ec2Instance = "ec2-user@3.17.150.175"
