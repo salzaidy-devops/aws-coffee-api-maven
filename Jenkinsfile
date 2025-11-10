@@ -104,6 +104,7 @@ pipeline {
         stage("commit version update") {
             steps {
                 script {
+                    echo "testing where these changes land"
                     sshagent(['github-ssh-key']) {
                         // 1) Trust GitHub host key (avoid host key verification error)
                         sh 'mkdir -p ~/.ssh'
