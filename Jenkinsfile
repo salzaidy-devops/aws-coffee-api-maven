@@ -43,21 +43,21 @@ pipeline {
         stage("increment build number") {
             steps {
                 script {
-                    // gv.incrementBuildNumber()
-                    echo 'incrementing build number...'
-                    sh 'mvn build-helper:parse-version versions:set \
-                        -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
-                        versions:commit'
-                    def matcher = readFile('pom.xml') =~ '<version>(.+?)</version>'
-                    def version = matcher ? matcher[0][1] : "0.0.1"
-                    echo "Raw version is: ${version}"
-                    
-                    def clearVersion = version.replace('-SNAPSHOT','')
-                    echo "Clear version is: ${clearVersion}"
+                    gv.setupMavenImageName()
 
-                    env.IMAGE_NAME = "salzaidy/aws-coffee-api:$clearVersion-$BUILD_NUMBER"
-                    // def versionWithBuild = "$clearVersion-$BUILD_NUMBER"
-                    echo "version With Build will be: ${env.IMAGE_NAME}"
+//                     sh 'mvn build-helper:parse-version versions:set \
+//                         -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+//                         versions:commit'
+//                     def matcher = readFile('pom.xml') =~ '<version>(.+?)</version>'
+//                     def version = matcher ? matcher[0][1] : "0.0.1"
+//                     echo "Raw version is: ${version}"
+//
+//                     def clearVersion = version.replace('-SNAPSHOT','')
+//                     echo "Clear version is: ${clearVersion}"
+//
+//                     env.IMAGE_NAME = "salzaidy/aws-coffee-api:$clearVersion-$BUILD_NUMBER"
+//                     // def versionWithBuild = "$clearVersion-$BUILD_NUMBER"
+//                     echo "version With Build will be: ${env.IMAGE_NAME}"
                 }
             }
         }
